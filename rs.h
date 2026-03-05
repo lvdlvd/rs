@@ -15,9 +15,11 @@
 
 // Workspace size (in bytes) needed by rs_encode_init() / rs_encode().
 // Holds the precomputed generator polynomial (degree N-K).
+// This is a macro so it can be used in array declarations.
 #define RS_ENCODE_WORKSPACE(N, K)  ((N) - (K) + 1)
 
 // Scratch size (in bytes) needed by rs_decode().
+// This is a macro so it can be used in array declarations.
 #define RS_DECODE_SCRATCH(N, K)    (4 * ((N) - (K)))
 
 // rs_encode_init() precomputes the generator polynomial for the given K and N.
