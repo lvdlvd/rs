@@ -2,10 +2,12 @@
 #include <stdio.h>
 #include <string.h>
 
-#define N 96
-#define K 64
-#define NSYM (N - K)
-#define T (NSYM / 2) // max correctable errors = 16
+enum {
+    N    = 96,
+    K    = 64,
+    NSYM = (N - K),
+    T    = (NSYM / 2), // max correctable errors 
+};
 
 static uint8_t orig[N];
 static uint8_t buf[N];
@@ -19,7 +21,7 @@ int main(void) {
     }
 
     // Initialize encoder and encode.
-    rs_encode_init(K, N, enc_work, sizeof(enc_work));
+    rs_encode_init(K, N, enc_work, sizeof enc_work);
     memcpy(orig, orig, K); // payload already set
     memcpy(buf, orig, K);
     rs_encode(buf, K, N, enc_work);
@@ -38,7 +40,7 @@ int main(void) {
             buf[pos] = 128;
         }
 
-        int rc = rs_decode(buf, K, N, dec_scratch, sizeof(dec_scratch));
+        int rc = rs_decode(buf, K, N, dec_scratch, sizeof dec_scratch);
 
         if (nerr <= T) {
             // Should succeed and reconstruct original.
