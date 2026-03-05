@@ -72,8 +72,6 @@ static inline uint8_t gf_mul(uint8_t a, uint8_t b) {
     return gf_exp[idx];
 }
 
-// --- Encoding ---
-
 void rs_encode_init(uint8_t K, uint8_t N, uint8_t* work, size_t work_len) {
     unsigned int nsym = N - K;
     assert(K > 0 && N > K && N <= 255);
@@ -111,8 +109,6 @@ void rs_encode(uint8_t* buf, uint8_t K, uint8_t N, uint8_t* work) {
         }
     }
 }
-
-// --- Decoding ---
 
 int rs_decode(uint8_t* buf, uint8_t K, uint8_t N, uint8_t* scratch, size_t scratch_len) {
     unsigned int nsym = N - K;
